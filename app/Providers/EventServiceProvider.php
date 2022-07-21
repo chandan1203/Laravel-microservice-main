@@ -23,8 +23,14 @@ class EventServiceProvider extends ServiceProvider
         // \App::bindMethod(TestJob::class . '@handle', function($job){
         //     return $job->handle();
         // });
+        
         \App::bindMethod(ProductCreated::class . '@handle', function($job){
+            return $job->handle();
+        });
+
         \App::bindMethod(ProductUpdated::class . '@handle', function($job){
+            return $job->handle();
+        });
         \App::bindMethod(ProductDeleted::class . '@handle', function($job){
             return $job->handle();
         });
