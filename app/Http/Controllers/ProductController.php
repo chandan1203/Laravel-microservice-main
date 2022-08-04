@@ -2,10 +2,11 @@
 
 namespace App\Http\Controllers;
 
-use App\Jobs\ProductLiked;
 use App\Models\Product;
+use App\Jobs\ProductLiked;
 use App\Models\ProductUser;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Http;
 use Symfony\Component\HttpFoundation\Response;
 
 class ProductController extends Controller
@@ -17,13 +18,13 @@ class ProductController extends Controller
 
     public function like($id, Request $request)
     {
-        $response = \Http::get('http://docker.for.mac.localhost:8000/api/user');
+        $response = Http::get('localhost:8000/api/user');
 
         $user = $response->json();
 
         try {
             $productuser = ProductUser::create([
-                'user_id' => $user['id'],
+                'user_id' => $user->id,
                 'product_id' =>  $id
             ]);
 
